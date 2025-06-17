@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo Fino - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Se o usuário já está logado, redireciona para a home
+        if (sessionStorage.getItem('usuarioLogado')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Passo Fino</h1>
+    </header>
+
+    <div id="nav-container"></div>
+
+    <main>
+        <div class="form-container">
+            <h2>Login de Usuário</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                Não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Passo Fino. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="navigation.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuarioValido = usuarios.find(user => user.email === email && user.senha === senha);
+
+            if (usuarioValido) {
+                // SUCESSO: Salva os dados do usuário na SESSÃO
+                sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioValido));
+                
+                alert(`Login bem-sucedido! Bem-vindo(a), ${usuarioValido.nome}!`);
+                window.location.href = 'index.html';
+            } else {
+                alert('Email ou senha incorretos. Por favor, tente novamente.');
+            }
+        });
+    </script>
+
+</body>
+</html>

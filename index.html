@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo Fino - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    // SCRIPT GUARDIÃO - VERIFICA SE O USUÁRIO ESTÁ LOGADO
+    if (!sessionStorage.getItem('usuarioLogado')) {
+        // Se não estiver logado, redireciona para a página de login
+        window.location.href = 'login.html';
+    }
+</script>
+</head>
+<body>
+
+    <header>
+        <h1>Passo Fino</h1>
+        <p>As melhores camisas de time, com a qualidade que você confia.</p>
+    </header>
+
+<div id="nav-container"></div>
+
+<script src="navigation.js"></script>
+
+    <main>
+        <div class="container">
+            <h2>Bem-vindo à Passo Fino!</h2>
+            <p>Explore nossa coleção exclusiva de camisas de times nacionais e internacionais. Qualidade e paixão em cada detalhe.</p>
+
+            <h3>Destaques da Semana</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="imagens/camisa-flamengo.webp" alt="Camisa do Flamengo">
+                    <h3>Camisa Flamengo I 2024/25</h3>
+                    <p>R$ 299,90</p>
+                    <a href="produtos.html" class="btn">Ver Coleção</a>
+                </div>
+
+                <div class="product-card">
+                    <img src="imagens/camisa-real-madrid-home-20252026-d1bc7f4bca93bf73d817459593241738-640-0.jpg" alt="Camisa do Real Madrid">
+                    <h3>Camisa Real Madrid I 2024/25</h3>
+                    <p>R$ 349,90</p>
+                    <a href="produtos.html" class="btn">Ver Coleção</a>
+                </div>
+
+                <div class="product-card">
+                    <img src="imagens/8d73c4bf-c40f-4066-bbba-9fa4dc2f03cd1-68b24c7187e8b9087116751675415610-640-0.jpeg" alt="Camisa do Corinthians">
+                    <h3>Camisa Corinthians I 2024/25</h3>
+                    <p>R$ 299,90</p>
+                    <a href="produtos.html" class="btn">Ver Coleção</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Passo Fino. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

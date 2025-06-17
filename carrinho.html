@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo Fino - Carrinho</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    // SCRIPT GUARDIÃO - VERIFICA SE O USUÁRIO ESTÁ LOGADO
+    if (!sessionStorage.getItem('usuarioLogado')) {
+        // Se não estiver logado, redireciona para a página de login
+        window.location.href = 'login.html';
+    }
+</script>
+</head>
+<body>
+
+    <header>
+        <h1>Passo Fino</h1>
+    </header>
+
+<div id="nav-container"></div>
+
+<script src="navigation.js"></script>
+
+    <main>
+        <div class="cart-container">
+            <h2>Meu Carrinho de Compras</h2>
+            
+            <div id="cart-items-container">
+                </div>
+
+            <p id="empty-cart-message">Seu carrinho está vazio.</p>
+
+            <div class="cart-total">
+                <p>Total: <span id="cart-total-value">R$ 0,00</span></p>
+            </div>
+
+            <div class="checkout-button-container">
+                <button id="checkout-button" class="btn">Finalizar Compra</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Passo Fino. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalValue = document.getElementById('cart-total-value');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const checkoutButton = document.getElementById('checkout-button');
+            
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+            function renderizarCarrinho() {
+                cartItemsContainer.innerHTML = ''; // Limpa o container
+                let total = 0;
+
+                if (carrinho.length === 0) {
+                    emptyCartMessage.style.display = 'block';
+                    checkoutButton.style.display = 'none';
+                } else {
+                    emptyCartMessage.style.display = 'none';
+                    checkoutButton.style.display = 'block';
+                    
+                    carrinho.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('cart-item');
+                        
+                        itemElement.innerHTML = `
+                            <img src="${item.imagem}" alt="${item.nome}">
+                            <div class="cart-item-info">
+                                <h4>${item.nome}</h4>
+                                <p class="cart-item-price">${item.preco}</p>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+                        
+                        // Converte o preço (ex: 'R$ 299,90') para número
+                        const precoNumerico = parseFloat(item.preco.replace('R$ ', '').replace(',', '.'));
+                        total += precoNumerico;
+                    });
+                }
+                
+                // Formata o total para o padrão brasileiro
+                cartTotalValue.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
+
+            checkoutButton.addEventListener('click', function() {
+                if (carrinho.length > 0) {
+                    alert('Compra finalizada com sucesso! Obrigado por comprar na Passo Fino.');
+                    // Limpa o carrinho
+                    localStorage.removeItem('carrinho');
+                    // Atualiza a exibição
+                    renderizarCarrinho();
+                    // Opcional: redirecionar para a home
+                    // window.location.href = 'index.html';
+                } else {
+                    alert('Seu carrinho está vazio.');
+                }
+            });
+
+            renderizarCarrinho();
+        });
+    </script>
+
+</body>
+</html>

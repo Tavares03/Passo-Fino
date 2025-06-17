@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo Fino - Produtos</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        // SCRIPT GUARDIÃO
+        if (!sessionStorage.getItem('usuarioLogado')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Passo Fino</h1>
+    </header>
+
+    <div id="nav-container"></div>
+
+    <main>
+        <div class="container">
+            <h2>Nossa Coleção</h2>
+
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="filtro-marca">Marca:</label>
+                    <select id="filtro-marca">
+                        <option value="todas">Todas as Marcas</option>
+                        <option value="adidas">Adidas</option>
+                        <option value="nike">Nike</option>
+                        <option value="puma">Puma</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-tipo">Tipo:</label>
+                    <select id="filtro-tipo">
+                        <option value="todos">Todos os Tipos</option>
+                        <option value="nacional">Nacional</option>
+                        <option value="internacional">Internacional</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-preco">Preço:</label>
+                    <select id="filtro-preco">
+                        <option value="todos">Qualquer Preço</option>
+                        <option value="ate-350">Até R$ 350</option>
+                        <option value="351-400">R$ 351 - R$ 400</option>
+                        <option value="acima-400">Acima de R$ 400</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid">
+
+                <div class="product-card" data-marca="adidas" data-tipo="nacional" data-preco="349.90">
+                    <img src="imagens/camisa-flamengo.webp" alt="Camisa do Flamengo">
+                    <h3>Camisa Flamengo I 24/25</h3>
+                    <p>R$ 349,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+
+                <div class="product-card" data-marca="nike" data-tipo="nacional" data-preco="329.90">
+                    <img src="imagens/8d73c4bf-c40f-4066-bbba-9fa4dc2f03cd1-68b24c7187e8b9087116751675415610-640-0.jpeg" alt="Camisa do Corinthians">
+                    <h3>Camisa Corinthians I 24/25</h3>
+                    <p>R$ 329,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+
+                <div class="product-card" data-marca="puma" data-tipo="nacional" data-preco="349.90">
+                    <img src="imagens/camisa-palmeiras-away1-fad485f3eddd4a869d17422424522021-640-0.jpg" alt="Camisa do Palmeiras">
+                    <h3>Camisa Palmeiras I 24/25</h3>
+                    <p>R$ 349,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+
+                <div class="product-card" data-marca="adidas" data-tipo="internacional" data-preco="449.90">
+                    <img src="imagens/camisa-real-madrid-home-20252026-d1bc7f4bca93bf73d817459593241738-640-0.jpg" alt="Camisa do Real Madrid">
+                    <h3>Camisa Real Madrid I 24/25</h3>
+                    <p>R$ 449,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+                
+                <div class="product-card" data-marca="nike" data-tipo="internacional" data-preco="429.90">
+                    <img src="imagens/camisa-barcelona-away1-7ca4ef0b28c56f2ef617259171205565-640-0.jpg" alt="Camisa do Barcelona">
+                    <h3>Camisa Barcelona I 24/25</h3>
+                    <p>R$ 429,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+
+                <div class="product-card" data-marca="puma" data-tipo="internacional" data-preco="399.90">
+                    <img src="imagens/camisa-manchester-city-home1-07f3d715f6c1cc502417428529708354-640-0.jpeg" alt="Camisa do Manchester City">
+                    <h3>Camisa Man. City I 24/25</h3>
+                    <p>R$ 399,90</p>
+                    <button class="btn btn-comprar">Comprar</button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Passo Fino. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="navigation.js"></script>
+    <script>
+        // --- SCRIPT DO CARRINHO (sem alterações) ---
+        document.querySelectorAll('.btn-comprar').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.product-card');
+                const produto = {
+                    nome: card.querySelector('h3').textContent,
+                    preco: card.querySelector('p').textContent,
+                    imagem: card.querySelector('img').src
+                };
+                let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+                carrinho.push(produto);
+                localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                alert(`'${produto.nome}' foi adicionado ao carrinho!`);
+            });
+        });
+
+        // --- NOVO SCRIPT DE FILTRAGEM ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const filtroMarca = document.getElementById('filtro-marca');
+            const filtroTipo = document.getElementById('filtro-tipo');
+            const filtroPreco = document.getElementById('filtro-preco');
+            const productCards = document.querySelectorAll('.product-card');
+
+            function aplicarFiltros() {
+                const marcaSelecionada = filtroMarca.value;
+                const tipoSelecionado = filtroTipo.value;
+                const precoSelecionado = filtroPreco.value;
+
+                productCards.forEach(card => {
+                    const marcaDoCard = card.dataset.marca;
+                    const tipoDoCard = card.dataset.tipo;
+                    const precoDoCard = parseFloat(card.dataset.preco);
+
+                    // Verificar se o card deve ser exibido
+                    let mostrar = true;
+
+                    // Filtro de Marca
+                    if (marcaSelecionada !== 'todas' && marcaDoCard !== marcaSelecionada) {
+                        mostrar = false;
+                    }
+
+                    // Filtro de Tipo
+                    if (tipoSelecionado !== 'todos' && tipoDoCard !== tipoSelecionado) {
+                        mostrar = false;
+                    }
+
+                    // Filtro de Preço
+                    switch (precoSelecionado) {
+                        case 'ate-350':
+                            if (precoDoCard > 350) mostrar = false;
+                            break;
+                        case '351-400':
+                            if (precoDoCard < 351 || precoDoCard > 400) mostrar = false;
+                            break;
+                        case 'acima-400':
+                            if (precoDoCard <= 400) mostrar = false;
+                            break;
+                    }
+                    
+                    // Exibe ou esconde o card
+                    card.style.display = mostrar ? 'flex' : 'none';
+                });
+            }
+
+            // Adiciona os "escutadores" de eventos aos filtros
+            filtroMarca.addEventListener('change', aplicarFiltros);
+            filtroTipo.addEventListener('change', aplicarFiltros);
+            filtroPreco.addEventListener('change', aplicarFiltros);
+        });
+    </script>
+</body>
+</html>

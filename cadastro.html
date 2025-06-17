@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo Fino - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Passo Fino</h1>
+    </header>
+
+<div id="nav-container"></div>
+
+<script src="navigation.js"></script>
+
+    <main>
+        <div class="form-container">
+            <h2>Crie sua Conta</h2>
+            <form id="cadastroForm">
+                <div class="form-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn">Cadastrar</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+                Já tem uma conta? <a href="login.html">Faça Login</a>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Passo Fino. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            // Impede o envio padrão do formulário, que recarregaria a página
+            event.preventDefault();
+
+            // Pega os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Pega a lista de usuários do localStorage ou cria uma lista vazia se não existir
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Verifica se o email já está em uso
+            const emailExistente = usuarios.find(user => user.email === email);
+            if (emailExistente) {
+                alert('Este email já está cadastrado. Por favor, utilize outro.');
+                return; // Para a execução da função
+            }
+
+            // Adiciona o novo usuário à lista
+            usuarios.push({ nome: nome, email: email, senha: senha });
+
+            // Salva a lista atualizada de volta no localStorage
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            // Informa o usuário do sucesso e o redireciona para a página de login
+            alert('Cadastro realizado com sucesso! Você será redirecionado para a página de login.');
+            window.location.href = 'login.html';
+        });
+    </script>
+
+</body>
+</html>
