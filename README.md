@@ -1,113 +1,88 @@
-<h1 align="center">
-  Passo Fino - E-commerce de Camisas de Time ⚽
-</h1>
+# Passo Fino: E-commerce Front-End
 
-<p align="center">
-  <em>Um projeto de e-commerce front-end completo, construído com tecnologias web puras, simulando uma experiência de compra real.</em>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Concluído-4CAF50?style=for-the-badge" alt="Status do Projeto: Concluído">
-  <img src="https://img.shields.io/badge/Licença-MIT-orange?style=for-the-badge" alt="Licença MIT">
-</p>
+Este é um projeto de e-commerce front-end que simula as funcionalidades de uma loja virtual para venda de camisas de time. A aplicação foi desenvolvida utilizando exclusivamente HTML, CSS e JavaScript, empregando o armazenamento do navegador (`localStorage` e `sessionStorage`) para simular a persistência de dados e sessões de usuário sem a necessidade de um back-end ou banco de dados.
 
 ---
 
-###  डेमो do Projeto (GIF)
+## Funcionalidades Principais
 
-<p align="center">
-  <img src="https://i.imgur.com/your-demo.gif" alt="Demonstração do Projeto Passo Fino" width="800"/>
-</p>
-
----
-
-## ✨ Funcionalidades
-
-O projeto conta com um conjunto robusto de funcionalidades para simular um ambiente de e-commerce real:
-
-* 👤 **Sistema de Autenticação:** Cadastro e Login de usuários com persistência de dados no `localStorage`.
-* 🛡️ **Sessão de Usuário e Rotas Protegidas:** Acesso restrito às páginas principais, redirecionando usuários não autenticados para a tela de login.
-* 📊 **Navegação Dinâmica:** O menu se adapta ao status do usuário, exibindo uma mensagem de boas-vindas e um botão "Sair".
-* 🔎 **Catálogo com Filtros Avançados:** Uma página de produtos com um sistema de filtragem em tempo real por:
-    * Marca (`Nike`, `Adidas`, `Puma`).
-    * Tipo (`Nacional`, `Internacional`).
-    * Faixa de Preço.
-* 🛒 **Carrinho de Compras Funcional:** Adicione produtos, visualize o carrinho, veja o total e "finalize" a compra, com dados salvos no `localStorage`.
+* **Autenticação de Usuários:** Sistema completo de cadastro e login.
+* **Gerenciamento de Sessão:** As páginas de conteúdo são protegidas e exigem que o usuário esteja autenticado. A sessão é encerrada ao fechar o navegador.
+* **Catálogo de Produtos com Filtros:** Exibição de produtos em grade com a funcionalidade de filtrar os resultados por marca, tipo (nacional/internacional) e faixa de preço.
+* **Carrinho de Compras:** Permite adicionar produtos, visualizar o carrinho, calcular o valor total e simular a finalização da compra.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-A tabela abaixo lista as tecnologias e ferramentas utilizadas na construção do projeto:
-
-| Tecnologia      | Propósito                                                   |
-| --------------- | ----------------------------------------------------------- |
-| **HTML5** | Estrutura semântica e conteúdo das páginas.                 |
-| **CSS3** | Estilização, design e layout (com Flexbox).                 |
-| **JavaScript** | Lógica, interatividade e manipulação de dados no cliente.   |
-| **Node.js** | Ambiente para rodar o servidor de desenvolvimento local.    |
-| **`serve`** | Pacote `npm` para criar um servidor estático instantâneo.   |
+* **HTML5:** Estrutura e marcação semântica do conteúdo.
+* **CSS3:** Estilização e layout, utilizando o modelo Flexbox.
+* **JavaScript (ES6+):** Lógica do lado do cliente, manipulação do DOM e gerenciamento de estado.
+* **Node.js / npm:** Utilizado como ambiente de execução para o servidor de desenvolvimento.
+* **`serve`:** Pacote `npm` para servir os arquivos estáticos localmente via HTTP.
 
 ---
 
-## ⚙️ Pré-requisitos
+## Pré-requisitos
 
-Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
+Para executar o projeto, é necessário ter as seguintes ferramentas instaladas:
 
-* [**Node.js (versão LTS)**](https://nodejs.org/en/)
-* Um navegador de internet moderno (Google Chrome, Firefox, etc.).
+* [Node.js (versão LTS)](https://nodejs.org/en/)
+* Um navegador de internet (ex: Google Chrome, Firefox).
 
 ---
 
-## ▶️ Como Rodar o Projeto
+## Instruções para Execução
 
-Siga estes passos para executar o projeto em sua máquina:
+Siga os passos abaixo para iniciar o projeto em um ambiente de desenvolvimento local.
 
-1.  **Clone o Repositório** (ou baixe os arquivos):
+1.  **Clone o Repositório**
+    Faça o clone do projeto para a sua máquina local.
     ```bash
     git clone [https://github.com/seu-usuario/passo-fino.git](https://github.com/seu-usuario/passo-fino.git)
     ```
 
-2.  **Acesse a Pasta do Projeto**:
+2.  **Acesse o Diretório do Projeto**
+    Navegue até a pasta raiz do projeto através do seu terminal.
     ```bash
     cd passo-fino
     ```
 
-3.  **Inicie o Servidor Local**:
-    Este comando irá iniciar um servidor na porta `3000`.
+3.  **Inicie o Servidor Local**
+    Este comando utiliza o `npx` para executar um servidor estático que servirá os arquivos do projeto.
     ```bash
     npx serve
     ```
 
-4.  **Acesse no Navegador**:
-    Abra seu navegador e visite o endereço: `http://localhost:3000`
+4.  **Abra o Projeto no Navegador**
+    Após a execução do comando anterior, o terminal indicará o endereço local. Acesse a URL fornecida, que por padrão é:
+    `http://localhost:3000`
 
-5.  **Pronto!** O site estará funcionando e você será redirecionado para a página de login. Para parar o servidor, volte ao terminal e pressione `Ctrl + C`.
-
----
-
-## 🛠️ Como o Sistema Funciona
-
-A persistência de dados é simulada utilizando a API de Armazenamento Web do navegador:
-
-* `localStorage`: Usado para dados que devem persistir mesmo após o fechamento do navegador.
-    * `usuarios`: Armazena a lista de todos os usuários cadastrados.
-    * `carrinho`: Salva os itens que o usuário adicionou ao carrinho de compras.
-* `sessionStorage`: Usado para dados que devem durar apenas durante a sessão da página (até o fechamento da aba).
-    * `usuarioLogado`: Guarda as informações do usuário que fez o login, servindo como "token" de autenticação para as rotas protegidas.
+O site será carregado, redirecionando para a página de login. Para encerrar o servidor, retorne ao terminal e pressione `Ctrl + C`.
 
 ---
 
-<details>
-  <summary>📁 Estrutura de Arquivos</summary>
-  passo-fino/
-├── 📄 index.html
-├── 📄 produtos.html
-├── 📄 carrinho.html
-├── 📄 login.html
-├── 📄 cadastro.html
-├── 📄 style.css
-├── 📄 navigation.js
-└── 📄 README.md
+## Arquitetura e Armazenamento de Dados
 
-</details>
+A aplicação utiliza a API de Armazenamento Web do navegador para simular a persistência de dados:
+
+* **`localStorage`**: Utilizado para dados que devem permanecer salvos mesmo após o navegador ser fechado.
+    * `usuarios`: Armazena um array JSON com os objetos de todos os usuários cadastrados.
+    * `carrinho`: Salva os itens que o usuário adiciona ao carrinho.
+
+* **`sessionStorage`**: Utilizado para dados que devem persistir apenas durante a sessão da página (até que a aba seja fechada).
+    * `usuarioLogado`: Armazena o objeto do usuário autenticado, funcionando como um token de sessão para validar o acesso às páginas protegidas.
+
+---
+
+## Estrutura de Arquivos
+
+passo-fino/
+├── index.html
+├── produtos.html
+├── carrinho.html
+├── login.html
+├── cadastro.html
+├── style.css
+├── navigation.js
+└── README.md
