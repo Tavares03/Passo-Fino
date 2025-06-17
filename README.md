@@ -77,12 +77,12 @@ A aplicação utiliza a API de Armazenamento Web do navegador para simular a per
 
 ## Estrutura de Arquivos
 
-passo-fino/
-├── index.html
-├── produtos.html
-├── carrinho.html
-├── login.html
-├── cadastro.html
-├── style.css
-├── navigation.js
-└── README.md
+passo-fino/</br>
+├── index.html</br>
+├── produtos.html</br>
+├── carrinho.html</br>
+├── login.html</br>
+├── cadastro.html</br>
+├── style.css</br>
+├── navigation.js</br>
+└── README.md</br>
